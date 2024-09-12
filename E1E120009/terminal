@@ -1,0 +1,176 @@
+import { useRouter } from 'expo-router';
+import { StyleSheet, View, Text, Image, TextInput, TouchableOpacity} from 'react-native';
+import { useFonts } from 'expo-font';
+import { useState } from 'react';
+
+export default function TranslationMuna() {
+
+  const [kalimat, setKalimat] = useState('');
+  const router = useRouter();
+  const [fontsLoaded, fontError] = useFonts({
+    'NicoMoji-Regular': require('@/assets/fonts/NicoMoji-Regular.ttf'),
+  });
+
+  if (!fontsLoaded && !fontError) {
+    return null;
+  }
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.topBox}>
+        <Text style={styles.boxText}>MunaLingua</Text>
+      </View>
+      <Image style={styles.icon} source={require('@/assets/images/icon.png')} />
+      <Image style={styles.munaform} source={require('@/assets/images/label-muna.png')}/>
+
+      <TextInput
+        style={styles.textInput}
+        value={kalimat}
+        onChangeText={setKalimat}
+        placeholder="Masukan Kalimat"
+        placeholderTextColor="gray"
+        multiline={true}
+        maxLength={500}
+        />
+
+        <View style={styles.whitelayer}>
+          <Image style={styles.indoform} source={require('@/assets/images/label-indo.png')} />
+
+          <View style={styles.swapbox}>
+            <TouchableOpacity style={styles.munabutton} onPress={() =>{}} >
+              <Text style={styles.munalabel}>Muna</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.indobutton} onPress={() => router.push ('/translationindo')}>
+              <Text style={styles.indolabel}>Indonesia</Text>
+            </TouchableOpacity>
+          </View>
+          <TouchableOpacity style={styles.swapbutton} onPress={() => router.push ('/translationindo')}>
+            <Image style={styles.swap} source={require('@/assets/images/swapicon.png')}/>
+          </TouchableOpacity>
+
+        </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#E0F4F3',
+  },
+
+// HEADER
+  topBox: {
+    position: 'relative',
+    width: '75%',
+    height: 80,
+    borderBottomRightRadius: 28,
+    backgroundColor: '#03CCC0',
+  },
+  boxText: {
+    position: 'absolute',
+    color: '#fff',
+    fontFamily: 'NicoMoji-Regular',
+    fontSize: 25,
+    top: '25%',
+    alignSelf: 'center',
+  },
+  icon: {
+    position: 'absolute',
+    top: 18,
+    left: '80%',
+  },
+// HEADER
+
+// MUNA FORM
+  munaform:{
+    top: 10,
+    left: 15,
+  },
+
+  textInput:{
+    height: 200,
+    marginTop: 20,
+    marginHorizontal: 20,
+    paddingHorizontal: 10,
+    fontSize: 15,
+    textAlignVertical: 'top',
+    
+  },
+
+// MUNA FORM
+
+// WHITE LAYER
+  whitelayer:{
+    position: 'absolute',
+    backgroundColor: '#ffff',
+    borderTopLeftRadius: 28,
+    borderTopRightRadius: 28,
+    alignSelf: 'center',
+    top: 352,
+    width: '100%',
+    height: '57%',
+  },
+  indoform:{
+    top: 10,
+    left: 15,
+  },
+  munabutton:{
+    backgroundColor: '#FFFF',
+    borderBottomLeftRadius: 50,
+    borderTopLeftRadius: 50,
+    shadowColor: '#000',
+    alignSelf: 'center',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    elevation: 5,
+    width: 194,
+    height:66,
+    top: 361,
+    right: 95,
+  },
+  munalabel:{
+    color: '#03CCC0',
+    fontFamily: 'NicoMoji-Regular',
+    textAlign: 'center',
+    top: 25,
+  },
+  indobutton:{
+    backgroundColor: '#03CCC0',
+    borderBottomRightRadius: 50,
+    borderTopRightRadius: 50,
+    shadowColor: '#000',
+    textAlign: 'center',
+    alignSelf: 'center',
+    shadowOffset: { width: 1, height: 0 },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    elevation: 5,
+    width: 194,
+    height:66,
+    top: 295,
+    left: 95,
+  },
+  indolabel:{
+    color: '#ffff',
+    fontFamily: 'NicoMoji-Regular',
+    top: 22,
+    textAlign: 'center',
+  },
+  swapbutton:{
+    backgroundColor: '#81E5DF',
+    borderRadius: 50,
+    width: 67,
+    height: 67,
+    top: 229,
+    alignSelf: 'center',
+  },
+  swap:{
+    left: 15,
+    top: 20,
+  },
+  swapbox:{
+  },
+// WHITE LAYER
+});
